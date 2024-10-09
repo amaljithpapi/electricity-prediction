@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electricity Price Prediction</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .btn-custom {
+            background-color: #00c6ff;
+            color: white;
+        }
+        .btn-custom:hover {
+            background-color: #0072ff;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 8px rgba(236, 26, 26, 0.716);
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-shadow: 1px 1px 6px rgba(11, 11, 11, 0.901);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container text-center">
+        <h1>Electricity Price Prediction</h1>
+          <form method="POST">
+            <div class="form-group">
+                <label for="forecast_wind">Forecast Wind Production (kWh)</label>
+                <input type="number" class="form-control" id="forecast_wind" name="forecast_wind" placeholder="Enter forecast wind production" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="system_load_ea">System Load EA (MW)</label>
+                <input type="number" class="form-control" id="system_load_ea" name="system_load_ea" placeholder="Enter system load EA" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="temperature">ORK Temperature (°C)</label>
+                <input type="number" class="form-control" id="temperature" name="temperature" placeholder="Enter temperature" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="windspeed">ORK Windspeed (km/h)</label>
+                <input type="number" class="form-control" id="windspeed" name="windspeed" placeholder="Enter windspeed" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="co2_intensity">CO2 Intensity (gCO2/kWh)</label>
+                <input type="number" class="form-control" id="co2_intensity" name="co2_intensity" placeholder="Enter CO2 intensity" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="actual_wind">Actual Wind Production (kWh)</label>
+                <input type="number" class="form-control" id="actual_wind" name="actual_wind" placeholder="Enter actual wind production" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="system_load_ep2">System Load EP2 (MW)</label>
+                <input type="number" class="form-control" id="system_load_ep2" name="system_load_ep2" placeholder="Enter system load EP2" step="0.01" required>
+            </div>
+            <button type="submit" class="btn btn-custom btn-lg">Predict Price</button>
+        </form>
+
+        {% if prediction_usd and prediction_inr %}
+            <div class="result">
+                <p>Predicted Electricity Price: <span class="text-warning">${{ prediction_usd }}</span></p>
+                <p>Predicted Electricity Price in INR: <span class="text-warning">₹{{ prediction_inr }}</span></p>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
